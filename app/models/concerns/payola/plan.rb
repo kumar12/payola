@@ -13,6 +13,7 @@ module Payola
       validates_uniqueness_of :stripe_id
 
       before_create :create_stripe_plan, if: -> { Payola.create_stripe_plans }
+      before_update :create_stripe_plan, if: -> { Payola.create_stripe_plans }
 
       has_many :subscriptions, :class_name => "Payola::Subscription", as: :plan,
         dependent: :restrict_with_exception
