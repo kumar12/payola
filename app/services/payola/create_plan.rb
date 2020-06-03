@@ -11,7 +11,7 @@ module Payola
 
       Stripe::Plan.create({
         id:                plan.stripe_id,
-        amount:            plan.amount,
+        amount:            plan.amount.to_i,
         interval:          plan.interval,
         name:              plan.name,
         interval_count:    plan.respond_to?(:interval_count) ? plan.interval_count : nil,
