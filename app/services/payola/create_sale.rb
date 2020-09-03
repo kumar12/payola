@@ -29,9 +29,9 @@ module Payola
 
         if coupon
           s.coupon = coupon
-          s.amount = product.price * (1 - s.coupon.percent_off / 100.0)
+          s.amount = product.price.cents * (1 - s.coupon.percent_off / 100.0)
         else
-          s.amount = product.price
+          s.amount = product.price.cents
         end
       end
     end
