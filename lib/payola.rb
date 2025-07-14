@@ -46,7 +46,10 @@ module Payola
       return publishable_key_retriever.call(sale).to_s
     end
 
-    def subscribe(name, callable = Proc.new)
+    def subscribe(name, callable = nil, &block)
+      callable ||= block
+      raise ArgumentError, "No callable or block given to Payola.subscribe" unless callable
+    
       StripeEvent.subscribe(name, callable)
     end
 
