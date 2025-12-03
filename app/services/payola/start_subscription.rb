@@ -25,6 +25,10 @@ module Payola
           quantity: subscription.quantity,
           tax_percent: subscription.tax_percent
         }
+
+       # If you want a fixed 30-day trial whenever no explicit trial_end is set:
+       create_params[:trial_period_days] = 30 if subscription.trial_end.blank?
+        
         create_params[:trial_end] = subscription.trial_end.to_i if subscription.trial_end.present?
         create_params[:coupon] = subscription.coupon if subscription.coupon.present?
         stripe_sub = customer.subscriptions.create(create_params)
